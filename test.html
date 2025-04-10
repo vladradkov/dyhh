@@ -1,1 +1,124 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Тест для оценки уровня духовного развития и осознанности.">
+    <title>Тест на духовное развитие</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Навигация -->
+    <header>
+        <div class="container">
+            <h1>Тест на духовное развитие</h1>
+        </div>
+    </header>
+
+    <!-- Вопросы теста -->
+    <section id="test" class="section">
+        <div class="container">
+            <h2>Ответьте на следующие вопросы, чтобы узнать свой уровень духовного развития:</h2>
+            <form id="quiz-form">
+
+                <!-- Вопрос 1 -->
+                <div class="question">
+                    <p><strong>1. Как часто вы занимаетесь самоанализом?</strong></p>
+                    <label><input type="radio" name="q1" value="1"> Редко, я редко задумываюсь о своих действиях.</label><br>
+                    <label><input type="radio" name="q1" value="2"> Иногда, когда что-то происходит.</label><br>
+                    <label><input type="radio" name="q1" value="3"> Часто, я стараюсь осознавать свои поступки.</label><br>
+                    <label><input type="radio" name="q1" value="4"> Очень часто, я анализирую свои чувства и действия ежедневно.</label><br>
+                </div>
+
+                <!-- Вопрос 2 -->
+                <div class="question">
+                    <p><strong>2. Как вы справляетесь с негативными эмоциями (стресс, злость)?</strong></p>
+                    <label><input type="radio" name="q2" value="1"> Я позволяю себе эмоции и не пытаюсь их контролировать.</label><br>
+                    <label><input type="radio" name="q2" value="2"> Стараюсь избегать эмоций, но они всё равно проявляются.</label><br>
+                    <label><input type="radio" name="q2" value="3"> Я стараюсь контролировать свои эмоции и часто успокаиваюсь.</label><br>
+                    <label><input type="radio" name="q2" value="4"> Я осознанно справляюсь с эмоциями, использую медитацию или глубокое дыхание.</label><br>
+                </div>
+
+                <!-- Вопрос 3 -->
+                <div class="question">
+                    <p><strong>3. Считаете ли вы духовное развитие важной частью своей жизни?</strong></p>
+                    <label><input type="radio" name="q3" value="1"> Нет, я не думаю, что духовность имеет значение.</label><br>
+                    <label><input type="radio" name="q3" value="2"> Возможно, но я не уделяю этому много внимания.</label><br>
+                    <label><input type="radio" name="q3" value="3"> Да, я считаю, что духовность помогает мне лучше понимать себя и окружающих.</label><br>
+                    <label><input type="radio" name="q3" value="4"> Безусловно, для меня духовное развитие — это важная часть жизни.</label><br>
+                </div>
+
+                <!-- Вопрос 4 -->
+                <div class="question">
+                    <p><strong>4. Как вы относитесь к медитации или практике осознанности?</strong></p>
+                    <label><input type="radio" name="q4" value="1"> Я никогда не пробовал и не думаю, что это полезно.</label><br>
+                    <label><input type="radio" name="q4" value="2"> Я пробовал, но не часто и не понимаю всех преимуществ.</label><br>
+                    <label><input type="radio" name="q4" value="3"> Я практикую медитацию время от времени и замечаю её пользу.</label><br>
+                    <label><input type="radio" name="q4" value="4"> Я медитирую регулярно, и это помогает мне чувствовать гармонию.</label><br>
+                </div>
+
+                <!-- Вопрос 5 -->
+                <div class="question">
+                    <p><strong>5. Насколько вы готовы меняться и развиваться?</strong></p>
+                    <label><input type="radio" name="q5" value="1"> Я не люблю менять свои привычки и не уверен в необходимости изменений.</label><br>
+                    <label><input type="radio" name="q5" value="2"> Иногда я задумываюсь о том, чтобы что-то изменить, но не всегда решаюсь.</label><br>
+                    <label><input type="radio" name="q5" value="3"> Я открытый человек и готов меняться, чтобы стать лучше.</label><br>
+                    <label><input type="radio" name="q5" value="4"> Я постоянно работаю над собой и стремлюсь к развитию каждый день.</label><br>
+                </div>
+
+                <!-- Кнопка для получения результатов -->
+                <div class="form-submit">
+                    <button type="button" onclick="calculateResults()">Пройти тест</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Результаты теста -->
+    <section id="results" class="section" style="display:none;">
+        <div class="container">
+            <h2>Ваш результат:</h2>
+            <p id="result-text"></p>
+        </div>
+    </section>
+
+    <!-- Подвал -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Духовное развитие. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script>
+        function calculateResults() {
+            var totalScore = 0;
+            var answers = document.querySelectorAll('input[type="radio"]:checked');
+
+            if (answers.length === 5) {
+                answers.forEach(function(answer) {
+                    totalScore += parseInt(answer.value);
+                });
+
+                var resultText = "";
+                if (totalScore <= 10) {
+                    resultText = "Вы только начинаете свой путь. Работайте над собой и двигайтесь к гармонии!";
+                } else if (totalScore <= 15) {
+                    resultText = "Вы на правильном пути, но ещё есть пространство для развития.";
+                } else if (totalScore <= 20) {
+                    resultText = "Вы хорошо развиты духовно, но всегда можно продолжать улучшаться.";
+                } else {
+                    resultText = "Вы достигли высокого уровня духовного развития! Продолжайте совершенствоваться.";
+                }
+
+                document.getElementById('result-text').textContent = resultText;
+                document.getElementById('results').style.display = "block";
+            } else {
+                alert("Пожалуйста, ответьте на все вопросы.");
+            }
+        }
+    </script>
+
+</body>
+</html>
 
